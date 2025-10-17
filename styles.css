@@ -1,0 +1,159 @@
+/* Part 1: The Visual Assault */
+body {
+    background-color: #00FF00; /* Neon Green */
+    background-image: url('https://media.tenor.com/J3-12nN0D7UAAAAM/hamster-dance.gif');
+    background-repeat: repeat;
+    cursor: url('https://cursors.totallyfreecursors.com/cursor_files/fairydust.ani'), url('https://cursors.totallyfreecursors.com/thumbnails/fairydust.gif'), auto;
+    font-family: 'Papyrus', fantasy;
+    min-width: 130vw;
+    user-select: none; -webkit-user-select: none; -moz-user-select: none;
+    overflow-x: hidden;
+}
+
+#enter-screen {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    color: white; z-index: 1000;
+    cursor: crosshair;
+    animation: color-cycle 1.5s linear infinite;
+}
+
+#enter-button {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em; padding: 20px 40px;
+    border: 4px dashed yellow; background-color: lime;
+    color: blue; font-weight: bold;
+    box-shadow: 5px 5px 0px magenta;
+    transition: all 0.1s linear;
+}
+
+.annoying-text {
+    position: absolute; font-size: 3em;
+    font-weight: bold; text-shadow: 3px 3px 0px black;
+    animation: blinker 0.5s linear infinite;
+}
+.text1 { top: 10%; left: 15%; color: red; }
+.text2 { top: 70%; left: 60%; color: cyan; font-size: 4em; }
+.text3 { top: 40%; left: 75%; color: yellow; animation-duration: 0.3s; }
+
+.small-text {
+    position: absolute; bottom: 10px;
+    width: 100%; text-align: center;
+    color: white; font-size: 0.8em;
+}
+
+#fake-close {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 2em; color: #ccc; cursor: not-allowed;
+}
+#fake-close:hover { color: red; }
+
+.hidden { display: none; }
+
+h1, h2, h3, p, nav { transition: all 0.5s ease; }
+
+h1, h2, h3 {
+    font-family: 'Comic Sans MS', cursive;
+    color: lime; background-color: hotpink;
+    padding: 15px; text-align: center;
+}
+
+p { color: yellow; background-color: blue; }
+.p1 { font-size: 24px; }
+.p2 { font-size: 8px; font-family: 'Wingdings', 'Zapf Dingbats'; }
+.p3 { font-size: 18px; color: fuchsia; }
+.p4 { font-size: 48px; }
+
+.blinking-text {
+    animation: blinker 0.5s linear infinite;
+    color: red; background-color: black; font-size: 3em;
+    font-weight: bold; text-transform: uppercase;
+}
+
+nav { background-color: orange; padding: 10px; text-align: center; }
+nav a { font-size: 22px; margin: 0 20px; color: white; text-decoration: none; background: purple; padding: 5px; }
+
+.popup {
+    display: none; position: fixed; left: 50%; top: 50%;
+    transform: translate(-50%, -50%); width: 400px; padding: 20px;
+    background: yellow; border: 10px dotted red; z-index: 10000;
+    text-align: center; box-shadow: 0 0 0 100vmax rgba(0,0,0,.8);
+    font-family: "Comic Sans MS"; color: black;
+}
+.popup-close { position: absolute; top: -2px; right: 2px; cursor: pointer; font-size: 8px; color: black; }
+.fake-x { font-size: 20px; color: black; text-decoration: none; position: absolute; top: 5px; right: 5px; }
+
+#progress-bar-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 25px;
+    background-color: #333; z-index: 9999;
+}
+#progress-bar {
+    width: 1%; height: 100%; background-color: #FF00FF;
+    animation: fake-load 15s linear infinite;
+}
+
+/* DIAL STYLES AND OTHERS */
+.dial-container { width: 250px; height: 250px; }
+.dial { width: 100%; height: 100%; transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); transform-origin: center; }
+.letter { width: 30px; height: 30px; transform-origin: center center; z-index: 10; }
+.pointer { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #f87171; }
+.center-button { width: 70px; height: 70px; transition: transform 0.1s ease, box-shadow 0.1s ease; }
+.center-button:active { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+.no-typing { cursor: pointer; }
+#dial-overlay { z-index: 5000; }
+
+.trail { 
+    position: absolute; height: 20px; width: 20px;
+    border-radius: 50%; background: cyan;
+    pointer-events: none; z-index: 9999;
+    box-shadow: 0 0 15px 5px cyan;
+}
+
+/* KEYFRAME ANIMATIONS */
+@keyframes color-cycle {
+    0%   { background-color: #FF0000; } 16%  { background-color: #FFFF00; } 33%  { background-color: #00FF00; }
+    50%  { background-color: #00FFFF; } 66%  { background-color: #0000FF; } 83%  { background-color: #FF00FF; }
+    100% { background-color: #FF0000; }
+}
+@keyframes blinker { 50% { opacity: 0; } }
+@keyframes fake-load { 0% { width: 1%; } 95% { width: 99%; } 100% { width: 99%; } }
+
+/* sanity-mode: makes the site readable when toggled (Shift+S) */
+body.sanity-mode {
+  background-color: #ffffff !important;
+  background-image: none !important;
+  min-width: auto !important;
+  cursor: auto !important;
+  color: #111 !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial !important;
+  user-select: text !important;
+  overflow-x: auto !important;
+  filter: none !important;
+  transition: all 0.25s ease !important;
+}
+body.sanity-mode h1,
+body.sanity-mode h2,
+body.sanity-mode h3,
+body.sanity-mode p,
+body.sanity-mode nav,
+body.sanity-mode a {
+  color: #111 !important;
+  background: transparent !important;
+  font-family: inherit !important;
+  text-shadow: none !important;
+}
+.sanity-mode .popup,
+.sanity-mode .dynamic-popup,
+.sanity-mode #enter-screen,
+.sanity-mode #progress-bar-container { display: none !important; }
+.sanity-mode .trail { display: none !important; }
+
+/* sanity-mode: revert the site to readable */
+body.sanity-mode {
+  background: #fff !important;
+  color: #111 !important;
+  filter: none !important;
+}
+body.sanity-mode * { color: #111 !important; background: transparent !important; }
+body.sanity-mode .ui-note, body.sanity-mode .ui-note * { display:none !important; }
