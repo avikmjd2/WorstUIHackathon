@@ -126,7 +126,8 @@
 
   // ---------- dynamic validation rules (ragebait) ----------
   const zodiac = ['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'];
-  const emojis = ['😀','😈','🔥','🌶️','🍕','🦄','🐹','✨','💀','🤡'];
+  // const emojis = ['😀','😈','🔥','🌶️','🍕','🦄','🐹','✨','💀','🤡'];
+  const emojis = [':happy',':frustrated'];
 
   function randomRules() {
     // create a set of requirements that change every time
@@ -307,21 +308,36 @@
       loader.textContent = ' ⏳';
       status.appendChild(loader);
 
+      // setTimeout(() => {
+      //   try {
+      //     saveProfile({ name, email, pass: '••••••' });
+      //     flashStatus('Saved! You did it. (Sort of)', false);
+      //     // sometimes still spawn a note as "confirmation"
+      //     if (Math.random() > 0.3) makeNote({ title: 'CONFIRM', text: 'Your registration is provisional.' });
+      //     // mutate rules after successful save (so next time is different)
+      //     currentRules = randomRules();
+      //     showRules();
+      //     // increment frustration slightly
+      //     try { localStorage.setItem('bestsite:frustration', String((parseInt(localStorage.getItem('bestsite:frustration')||'0')||0) + 1)); } catch(e){}
+      //   } finally {
+      //     if (loader.parentNode) loader.remove();
+      //   }
+      // }, 1200 + Math.random()*1200);
+
+
+      // Redirect after a short delay
       setTimeout(() => {
-        try {
-          saveProfile({ name, email, pass: '••••••' });
-          flashStatus('Saved! You did it. (Sort of)', false);
-          // sometimes still spawn a note as "confirmation"
-          if (Math.random() > 0.3) makeNote({ title: 'CONFIRM', text: 'Your registration is provisional.' });
-          // mutate rules after successful save (so next time is different)
-          currentRules = randomRules();
-          showRules();
-          // increment frustration slightly
-          try { localStorage.setItem('bestsite:frustration', String((parseInt(localStorage.getItem('bestsite:frustration')||'0')||0) + 1)); } catch(e){}
-        } finally {
-          if (loader.parentNode) loader.remove();
-        }
-      }, 1200 + Math.random()*1200);
+          try {
+              // We can still save this, so it appears on next visit
+              saveProfile({ name, email, pass: '••••••' }); 
+          } catch(e) {
+              console.warn('Could not save profile to localStorage', e);
+          }
+
+          // The main action: redirect
+          window.location.href = 'hello.html';
+
+      }, 1500); // A fixed 1.5 second delay
     });
   }
 
@@ -421,3 +437,4 @@
   };
 
 })();
+
